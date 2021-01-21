@@ -1,40 +1,24 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sharesales/authscreen.dart';
+import 'package:sharesales/splashscreen.dart';
 
-void main() => runApp(MyApp());
+var routes = <String, WidgetBuilder>{
+  "/auth": (BuildContext context) => AuthScreen(),
+};
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Main(),
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'Share Sales !!',
+    theme: ThemeData(
+        primarySwatch: Colors.pink
+    ),
+    routes: routes,
+    home: SplashScreen(),
+  ));
 }
 
-class Main extends StatelessWidget {
-  var title, subtitle;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.save), onPressed: () async{
-            await Firestore.instance.collection('Sales').add({'title':title, 'subtitle':subtitle});
-            Navigator.pop(context);
-          })
-        ],
-      ),
-      body: Column(
-        children: [
-          TextFormField(
-            onChanged: (text) => title = text,
-          ),
-          TextFormField(
-            onChanged: (text) => subtitle = text,
-          ),
-        ],
-      ),
-    );
-  }
-}
