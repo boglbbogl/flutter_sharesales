@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "974537985246",
+    "project_id": "sharesales-91ab3",
+    "storage_bucket": "sharesales-91ab3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974537985246:android:7ed765fbead3ac9d8e064f",
+        "android_client_info": {
+          "package_name": "com.example.sharesales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974537985246-iguhsdb4vhqh2c8p2vpjlg9qv9ijtvji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARAeZsF7kUB8ma0dWUOKDZf6hPdwsafPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974537985246-iguhsdb4vhqh2c8p2vpjlg9qv9ijtvji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
