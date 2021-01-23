@@ -3,8 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:sharesales/salesregistrationpage.dart';
 
 
@@ -34,7 +32,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                 iconSize: 30,
                 color: Colors.pinkAccent,
                 onPressed: () async{
-                  await FirebaseFirestore.instance.collection('abc').add({'abc': title});
+                  // await FirebaseFirestore.instance.collection('abc').add({'abc': title});
                   // .add({'ActualSalesTotal': _ActualSalesTotal},);
                   // if (!_formKey.currentState.validate()) {
                   //   return;
