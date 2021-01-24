@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
+import 'dart:ui';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 
 class SalesAddPage extends StatefulWidget {
@@ -13,14 +16,21 @@ class SalesAddPage extends StatefulWidget {
 class _SalesAddPageState extends State<SalesAddPage> {
   final _formKey = GlobalKey<FormState>();
 
+  String _dbWritingTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
   DateTime _selectedTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+
     final inputSizeHeight = MediaQuery.of(context).size.height * 0.1;
     final inputSizeWidth = MediaQuery.of(context).size.width * 0.4;
+
+    final moneyInputFormatter = MoneyInputFormatter(
+      useSymbolPadding: true,
+      mantissaLength: 3,
+    );
 
     var inputDate = DateFormat('EEE, d MMM yy').format(_selectedTime);
 
@@ -41,11 +51,11 @@ class _SalesAddPageState extends State<SalesAddPage> {
                 onPressed: () async {
                   await firestore
                       .collection('Sales')
-                      .doc('$_selectedTime')
+                      .doc('$_dbWritingTime')
                       .set({
-                    'TotalSales': int.parse(totalsales),
+                    'TotalSales': int.parse(totalsales).toInt(),
                     // 'date': _selectedTime.microsecondsSinceEpoch,
-                    'ActualSales': int.parse(actualsales),
+                    'ActualSales': int.parse(actualsales).toInt(),
                     // 'VOS' : vos,
                     // 'VAT' : vat,
                     // 'Discount' : discount,
@@ -55,13 +65,12 @@ class _SalesAddPageState extends State<SalesAddPage> {
                     // 'Cash' : cash,
                     // 'CashReceipt' : cashreceipt,
                   });
-                  // .add({'ActualSalesTotal': _ActualSalesTotal},);
                   if (!_formKey.currentState.validate()) {
                     return;
                   }
                   _formKey.currentState.save();
                   print("save");
-                  // Navigator.pop(context);
+                  Navigator.pop(context);
                 },
               ),
             ),
@@ -143,19 +152,19 @@ class _SalesAddPageState extends State<SalesAddPage> {
                     width: inputSizeWidth,
                     child: TextFormField(
                       onChanged: (value) {totalsales = value;},
-                      // validator: (value) {
-                      //   if (value.isEmpty) {
-                      //     return 'Enter some text';
-                      //   } else
-                      //     return null;
-                      // },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Enter some text';
+                        } else
+                          return null;
+                      },
                       decoration: InputDecoration(
                         // border: InputBorder.none,
                         // hintText: '총 매출',
                         labelText: '총매출',
                       ),
                       keyboardType: TextInputType.number,
-                      // initialValue: '0',
+                      inputFormatters: [moneyInputFormatter],
                     ),
                   ),
                   Container(
@@ -174,7 +183,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                         labelText: '실매출',
                       ),
                       keyboardType: TextInputType.number,
-                  
+                      inputFormatters: [moneyInputFormatter],
                     ),
                   ),
                 ],

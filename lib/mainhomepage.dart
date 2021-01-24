@@ -96,15 +96,7 @@ class _MainHomePageState extends State<MainHomePage> {
 class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-          child: Text(
-            "First",
-            style: TextStyle(
-                color: Colors.purple, fontSize: 200, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
-          )),
-      color: Colors.pinkAccent,
-    );
+    return Container();
   }
 }
 

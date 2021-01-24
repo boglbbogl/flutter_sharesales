@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_auth.currentUser != null) {
       // &&  FirebaseAuth.instance.currentUser.reload() != null
       Timer(
-        Duration(),
+        Duration(seconds: 4),
             () => Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
                 builder: (context) =>
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 (Route<dynamic> route) => false),
       );
     } else {
-      Timer(Duration(),
+      Timer(Duration(seconds: 4),
               () => Navigator.pushReplacementNamed(context, "/auth"));
     }
   }

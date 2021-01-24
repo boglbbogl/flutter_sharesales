@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sharesales/authscreen.dart';
 import 'package:sharesales/splashscreen.dart';
+import 'dart:async';
+import 'dart:ui';
 
 var routes = <String, WidgetBuilder>{
   "/auth": (BuildContext context) => AuthScreen(),
