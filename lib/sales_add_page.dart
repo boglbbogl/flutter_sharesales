@@ -16,7 +16,6 @@ class SalesAddPage extends StatefulWidget {
 class _SalesAddPageState extends State<SalesAddPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String _dbWritingTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
   DateTime _selectedTime = DateTime.now();
 
   @override
@@ -28,14 +27,17 @@ class _SalesAddPageState extends State<SalesAddPage> {
     final inputSizeWidth = MediaQuery.of(context).size.width * 0.4;
 
     final moneyInputFormatter = MoneyInputFormatter(
-      useSymbolPadding: true,
-      mantissaLength: 3,
+      useSymbolPadding: false,
+      mantissaLength: 2,
     );
 
     var inputDate = DateFormat('EEE, d MMM yy').format(_selectedTime);
+    var dbWritingDate = DateFormat('yyyy MM dd EEE').format(_selectedTime);
 
-    var totalsales, actualsales;
+    var totalsales;
+    var actualsales;
     // , vos, vat, discount, delivery, card, vocher, cash, cashreceipt;
+
 
     return Form(
       key: _formKey,
@@ -51,11 +53,11 @@ class _SalesAddPageState extends State<SalesAddPage> {
                 onPressed: () async {
                   await firestore
                       .collection('Sales')
-                      .doc('$_dbWritingTime')
+                      .doc('$dbWritingDate')
                       .set({
-                    'TotalSales': int.parse(totalsales).toInt(),
+                    'TotalSales': totalsales,
                     // 'date': _selectedTime.microsecondsSinceEpoch,
-                    'ActualSales': int.parse(actualsales).toInt(),
+                    'ActualSales': actualsales,
                     // 'VOS' : vos,
                     // 'VAT' : vat,
                     // 'Discount' : discount,
@@ -151,7 +153,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                     height: inputSizeHeight,
                     width: inputSizeWidth,
                     child: TextFormField(
-                      onChanged: (value) {totalsales = value;},
+                      onChanged: (value) { totalsales = value;},
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Enter some text';
