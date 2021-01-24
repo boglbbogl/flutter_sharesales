@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sharesales/salesregistrationpage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
@@ -25,9 +24,8 @@ class _SalesAddPageState extends State<SalesAddPage> {
 
     var inputDate = DateFormat('EEE, d MMM yy').format(_selectedTime);
 
-
-    var totalsales, actualsales, vos, vat, discount, delivery, card, vocher, cash, cashreceipt;
-
+    var totalsales, actualsales;
+    // , vos, vat, discount, delivery, card, vocher, cash, cashreceipt;
 
     return Form(
       key: _formKey,
@@ -45,17 +43,17 @@ class _SalesAddPageState extends State<SalesAddPage> {
                       .collection('Sales')
                       .doc('$_selectedTime')
                       .set({
-                    'TotalSales': totalsales,
+                    'TotalSales': int.parse(totalsales),
                     // 'date': _selectedTime.microsecondsSinceEpoch,
-                    'ActualSales': actualsales,
-                    'VOS' : vos,
-                    'VAT' : vat,
-                    'Discount' : discount,
-                    'Delivery' : delivery,
-                    'Card' : card,
-                    'Vocher' : vocher,
-                    'Cash' : cash,
-                    'CashReceipt' : cashreceipt,
+                    'ActualSales': int.parse(actualsales),
+                    // 'VOS' : vos,
+                    // 'VAT' : vat,
+                    // 'Discount' : discount,
+                    // 'Delivery' : delivery,
+                    // 'Card' : card,
+                    // 'Vocher' : vocher,
+                    // 'Cash' : cash,
+                    // 'CashReceipt' : cashreceipt,
                   });
                   // .add({'ActualSalesTotal': _ActualSalesTotal},);
                   if (!_formKey.currentState.validate()) {
@@ -63,6 +61,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                   }
                   _formKey.currentState.save();
                   print("save");
+                  // Navigator.pop(context);
                 },
               ),
             ),
@@ -71,11 +70,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
               child: IconButton(
                 icon: Icon(Icons.backspace_outlined),
                 color: Colors.pinkAccent,
-                onPressed: () => Navigator.pop(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SalesRegistrationPage()),
-                ),
+                onPressed: () => Navigator.pop(context),
               ),
             ),
           ],
@@ -147,7 +142,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                     height: inputSizeHeight,
                     width: inputSizeWidth,
                     child: TextFormField(
-                      onChanged: (value) => totalsales,
+                      onChanged: (value) {totalsales = value;},
                       // validator: (value) {
                       //   if (value.isEmpty) {
                       //     return 'Enter some text';
@@ -160,6 +155,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                         labelText: '총매출',
                       ),
                       keyboardType: TextInputType.number,
+                      // initialValue: '0',
                     ),
                   ),
                   Container(
@@ -167,7 +163,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                     height: inputSizeHeight,
                     width: inputSizeWidth,
                     child: TextFormField(
-                      onChanged: (text) => actualsales = text,
+                      onChanged: (value) { actualsales = value;},
                       // validator: (value) {
                       //   if (value.isEmpty) {
                       //     return 'Enter some text';
@@ -178,194 +174,195 @@ class _SalesAddPageState extends State<SalesAddPage> {
                         labelText: '실매출',
                       ),
                       keyboardType: TextInputType.number,
+                  
                     ),
                   ),
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (text) => vos = text,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '공급가액',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (text) => vat = text,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: 'VAT포함',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (text) => discount = text,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '할인',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (text) => delivery = text,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '배달',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (text) => card = text,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '신용카드',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (text) => vocher = text,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '상품권',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (int) => cash = int,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '현금',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: inputSizeHeight,
-                        width: inputSizeWidth,
-                        child: TextFormField(
-                          onChanged: (int) => cashreceipt = int,
-                          // validator: (value) {
-                          //   if (value.isEmpty) {
-                          //     return 'Enter some text';
-                          //   } else
-                          //     return null;
-                          // },
-                          decoration: InputDecoration(
-                            labelText: '현금영수증',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              // Column(
+              //   children: <Widget>[
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: <Widget>[
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (text) => vos = text,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '공급가액',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (text) => vat = text,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: 'VAT포함',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              // Column(
+              //   children: <Widget>[
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: <Widget>[
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (text) => discount = text,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '할인',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (text) => delivery = text,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '배달',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              // Column(
+              //   children: <Widget>[
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: <Widget>[
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (text) => card = text,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '신용카드',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (text) => vocher = text,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '상품권',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              // Column(
+              //   children: <Widget>[
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: <Widget>[
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (int) => cash = int,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '현금',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //         Container(
+              //           alignment: Alignment.topCenter,
+              //           height: inputSizeHeight,
+              //           width: inputSizeWidth,
+              //           child: TextFormField(
+              //             onChanged: (int) => cashreceipt = int,
+              //             // validator: (value) {
+              //             //   if (value.isEmpty) {
+              //             //     return 'Enter some text';
+              //             //   } else
+              //             //     return null;
+              //             // },
+              //             decoration: InputDecoration(
+              //               labelText: '현금영수증',
+              //             ),
+              //             keyboardType: TextInputType.number,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
