@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sharesales/salesregistrationpage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/foundation.dart';
 
 
 class SalesAddPage extends StatefulWidget {
@@ -15,15 +14,13 @@ class SalesAddPage extends StatefulWidget {
 class _SalesAddPageState extends State<SalesAddPage> {
   final _formKey = GlobalKey<FormState>();
 
-  DateTime _selectedTime ;
-  // final dateStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
+  DateTime _selectedTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    var inputDate = DateFormat('E MMM dd yy').format(_selectedTime);
+    var inputDate = DateFormat('EEE, d MMM yy').format(_selectedTime);
 
     var title;
 
@@ -97,7 +94,7 @@ class _SalesAddPageState extends State<SalesAddPage> {
                     height: MediaQuery.of(context).size.height * 0.1,
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: InkWell(
-                      onTap: () {
+                      onTap: () async {
                         Future<DateTime> selectedDate = showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
