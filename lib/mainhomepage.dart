@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:sharesales/salesmanagement/salesmainpage.dart';
 import 'package:sharesales/salesmanagement/salespage.dart';
 import 'package:sharesales/salesregistrationpage.dart';
 import 'package:sharesales/sales_add_page.dart';
@@ -55,7 +56,7 @@ class _MainHomePageState extends State<MainHomePage> {
       children: <Widget>[
         FirstPage(),
         b(),
-        SalesPage(),
+        SalesMainPage(),
         d(),
         accountPage(),
       ],

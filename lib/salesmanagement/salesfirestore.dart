@@ -1,6 +1,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:sharesales/salesmanagement/salesdata.dart';
+import 'package:sharesales/salesmanagement/salespage.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -10,7 +12,7 @@ class SalesFirestore {
   // Create
   Future addData(SalesData salesdata) async {
     TransactionHandler createTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await tx.get(salescollection.doc());
+      final DocumentSnapshot ds = await tx.get(salescollection.doc('$selectedTime'));
       Map<String, dynamic> data = {
         'totalsales' : salesdata.totalsales,
         'actualsales' : salesdata.actualsales,

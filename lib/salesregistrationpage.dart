@@ -15,61 +15,61 @@ class _SalesRegistrationPageState extends State<SalesRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: salesListView(),
-      // body: Center(
-      //   child: Column(
-      //     children: <Widget>[
-      //       Container(
-      //         height: MediaQuery.of(context).size.height * 0.20,
-      //         width: MediaQuery.of(context).size.width * 0.9,
-      //         decoration: BoxDecoration(
-      //             borderRadius: BorderRadius.circular(27),
-      //             gradient: LinearGradient(
-      //                 end: Alignment.bottomCenter,
-      //                 begin: Alignment.center,
-      //                 colors: <Color>[Colors.white, Colors.purple])),
-      //         child: Card(
-      //           elevation: 40,
-      //           shape: RoundedRectangleBorder(
-      //             borderRadius: BorderRadius.circular(20),
-      //           ),
-      //           child: Stack(
-      //             children: <Widget>[
-      //               Positioned(
-      //                 child: Text(
-      //                   '총매출 : 3,000,000',
-      //                   style: TextStyle(color: Colors.black),
-      //                 ),
-      //                 top: 20,
-      //               ),
-      //               Positioned(
-      //                 child: Text(
-      //                   '공급가액 : 2,700,000',
-      //                   style: TextStyle(color: Colors.black),
-      //                 ),
-      //                 top: 40,
-      //               ),
-      //               Positioned(
-      //                 child: Text(
-      //                   '할인 : 1,000',
-      //                   style: TextStyle(color: Colors.black),
-      //                 ),
-      //                 top: 60,
-      //               ),
-      //               Positioned(
-      //                 child: Text(
-      //                   '실매출 : 2,800,000',
-      //                   style: TextStyle(color: Colors.black),
-      //                 ),
-      //                 top: 80,
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      // body: salesListView(),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * 0.20,
+              width: MediaQuery.of(context).size.width * 0.9,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(27),
+                  gradient: LinearGradient(
+                      end: Alignment.bottomCenter,
+                      begin: Alignment.center,
+                      colors: <Color>[Colors.white, Colors.purple])),
+              child: Card(
+                elevation: 40,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      child: Text(
+                        '총매출 : 3,000,000',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      top: 20,
+                    ),
+                    Positioned(
+                      child: Text(
+                        '공급가액 : 2,700,000',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      top: 40,
+                    ),
+                    Positioned(
+                      child: Text(
+                        '할인 : 1,000',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      top: 60,
+                    ),
+                    Positioned(
+                      child: Text(
+                        '실매출 : 2,800,000',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      top: 80,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () =>

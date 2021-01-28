@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sharesales/salesmanagement/salesdata.dart';
 import 'package:sharesales/salesmanagement/salesfirestore.dart';
+import 'package:sharesales/salesmanagement/salespage.dart';
 
 class SalesMainPage extends StatefulWidget {
   @override
@@ -41,6 +42,15 @@ class _SalesMainPageState extends State<SalesMainPage> {
               );
             },
         ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SalesPage(),)
+          );
+        },
+      ),
     );
   }
 }
