@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pattern_formatter/numeric_formatter.dart';
 import 'package:sharesales/salesmanagement/salesdata.dart';
-
+import 'dart:async';
+import 'dart:ui';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:sharesales/salesmanagement/salesfirestore.dart';
 
 
 DateTime selectedTime = DateTime.now();
-//
+
+
 class SalesPage extends StatefulWidget {
   @override
   _SalesPageState createState() => _SalesPageState();
@@ -20,6 +22,7 @@ class _SalesPageState extends State<SalesPage> {
 
   @override
   Widget build(BuildContext context) {
+
     String _totalsales;
     int _actualsales;
 
@@ -38,7 +41,7 @@ class _SalesPageState extends State<SalesPage> {
                 iconSize: 30,
                 color: Colors.pinkAccent,
                 onPressed: () async {
-                  SalesData salesdata = await SalesData(_totalsales, _actualsales);
+                  SalesData salesdata = SalesData(_totalsales, _actualsales);
                   fireserv.addData(salesdata);
                   print("save!!");
                   Navigator.pop(context);

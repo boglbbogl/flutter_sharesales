@@ -1,4 +1,4 @@
-
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:sharesales/salesmanagement/salesdata.dart';
@@ -6,8 +6,11 @@ import 'package:sharesales/salesmanagement/salespage.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+
 class SalesFirestore {
   final CollectionReference salescollection = firestore.collection('Sales');
+
+
 
   // Create
   Future addData(SalesData salesdata) async {
@@ -26,7 +29,7 @@ class SalesFirestore {
     });
   }
 
-  Stream<QuerySnapshot> getDocumments(){
+  Stream<QuerySnapshot> getDocumments() {
     Stream<QuerySnapshot> snapshots = salescollection.snapshots();
     return snapshots;
   }
